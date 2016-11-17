@@ -1,0 +1,48 @@
+﻿@model LoginAndRegisterViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-page" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="login-header margin-bottom-30">
+            <h2>Kullanıcı Girişi</h2>
+        </div>
+        <div class="input-group margin-bottom-20">
+            <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+            </span>
+            @Html.TextBoxFor(x => x.Login.KullaniciAdi, new { @class = "form-control", placeholder = "Kulanıcı Adı" })
+        </div>
+        <div class="input-group margin-bottom-20">
+            <span class="input-group-addon">
+                <i class="fa fa-lock"></i>
+            </span>
+            @Html.TextBoxFor(x => x.Login.Sifre, new { @class = "form-control", placeholder = "Şifre", type = "password" })
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(x => x.Login.HatirlansinMi)
+                    Beni Hatırla
+                </label>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary pull-right" type="submit">Giriş Yap</button>
+            </div>
+        </div>
+            <hr>
+            <h4>Şifreni mi unuttun ?</h4>
+            <p>
+                <a href="@Url.Action("recoverpassword","Account")">Buraya tıkla</a>
+            </p>
+            <h4>Hesabın yok mu ?</h4>
+            <p>
+                <a href="@Url.Action("Register","Account")">Buraya tıkla</a>
+            </p>
+    }
+</div>
+
